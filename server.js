@@ -2,9 +2,22 @@ import express from 'express';
 import { APP_PORT, MONGODB_CONNECTION_URL } from './config';
 import mongoose from 'mongoose';
 import router from './routes/web';
+import expressEjsLayouts from 'express-ejs-layouts';
+import path from 'path'; 
+
 
 
 const app = express(); 
+
+// Middleware setup
+
+app.use(expressEjsLayouts); 
+app.set('view engine', 'ejs'); 
+app.use(express.static(path.join(__dirname + '/public')));
+app.use(express.urlencoded({extended: false})); 
+app.use(express.json()); 
+app.set('layout', 'layouts/layout.ejs'); 
+app.use(router); 
 
 const PORT = APP_PORT || 3001; 
 
@@ -16,12 +29,8 @@ mongoose.connect(MONGODB_CONNECTION_URL).then((res) => {
 })
 
 
-app.use(router);
 
 
-app.get('/', (req, res) => { 
-    res.send("everthing is fine"); 
-}); 
 
 
 // listening to the server
