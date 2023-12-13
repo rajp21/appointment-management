@@ -34,12 +34,12 @@ const userSchema = new Schema({
     }, 
     
     address: { 
-        flatNoOrhouseNo: { type: String }, 
-        buildingOrApartment: { type: String }, 
-        StreetOrAreaName: { type: String }, 
-        cityName: { type: String }, 
-        state: { type: String }, 
-        pincode: { type: String }, 
+        flatNoOrhouseNo: { type: String, default: null }, 
+        buildingOrApartment: { type: String, default: null }, 
+        StreetOrAreaName: { type: String, default: null }, 
+        cityName: { type: String, default: null }, 
+        state: { type: String, default: null }, 
+        pincode: { type: String, default: null }, 
         geolocation: {type: String, default: null}
     }, 
 
