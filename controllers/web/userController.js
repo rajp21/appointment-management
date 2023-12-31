@@ -1,5 +1,6 @@
 import { User } from "../../models";
 import Joi from "joi";
+import Service from "../../models/services/services";
 
 const userController = { 
     async saveUser(req, res, next){ 
@@ -105,6 +106,21 @@ const userController = {
         }
 
         return res.status(200).json(user); 
+    }, 
+
+    async getAllServices(req, res, next){ 
+        let allServices; 
+
+        try{ 
+            allServices = await Service.find(); 
+        }catch(e){ 
+            return next(e);
+        }
+
+        return res.status(200).json({
+            success: true, 
+            services: allServices
+        })
     }
 
 }
